@@ -19,12 +19,12 @@ type FormTypes = {
 };
 
 export const AuthForm: FC<FormTypes> = ({ formType }) => {
-  const { register, onSubmit } = useAuthForm();
+  const { register, onLogin, onRegister } = useAuthForm();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
       {renderTitle(formType)}
-      <Form className="p-10" onSubmit={onSubmit}>
+      <Form className="p-10" onSubmit={formType === "login" ? onLogin : onRegister}>
         <FieldSet>
           <FieldGroup>
             <Field>
