@@ -8,5 +8,12 @@ export const UseAuth = () => {
       headers: { "Content-Type": "application/json" }
     });
 
-  return { login };
+  const register = (email: string, password: string) =>
+    fetchItem("/register", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" }
+    });
+
+  return { login, register };
 };
