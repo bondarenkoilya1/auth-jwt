@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { authSchema, type AuthValues } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const useAuth = () => {
+export const useAuthForm = () => {
   const { handleSubmit, register } = useForm<AuthValues>({
     resolver: zodResolver(authSchema)
   });

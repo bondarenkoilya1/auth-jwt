@@ -12,14 +12,14 @@ import {
   Input,
   Typography
 } from "@/components/ui";
-import { useAuth } from "@/modules/Auth";
+import { useAuthForm } from "@/modules/Auth";
 
 type FormTypes = {
   formType: "login" | "register";
 };
 
 export const AuthForm: FC<FormTypes> = ({ formType }) => {
-  const { register, onSubmit } = useAuth();
+  const { register, onSubmit } = useAuthForm();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
