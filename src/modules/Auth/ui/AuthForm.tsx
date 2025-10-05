@@ -12,27 +12,19 @@ import {
   Input,
   Typography
 } from "@/components/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { type AuthValues, authSchema } from "@/modules/Auth/schemes/authSchema.ts";
+import { useAuth } from "@/modules/Auth";
 
 type FormTypes = {
   formType: "login" | "register";
 };
 
 export const AuthForm: FC<FormTypes> = ({ formType }) => {
-  const { handleSubmit, register } = useForm<AuthValues>({
-    resolver: zodResolver(authSchema)
-  });
-
-  const onSubmit = (values: AuthValues) => {
-    console.log(values);
-  };
+  const { register, onSubmit } = useAuth();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
       {renderTitle(formType)}
-      <Form className="p-10" onSubmit={handleSubmit(onSubmit)}>
+      <Form className="p-10" onSubmit={onSubmit}>
         <FieldSet>
           <FieldGroup>
             <Field>
