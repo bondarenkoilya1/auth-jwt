@@ -36,9 +36,14 @@ export const AuthForm: FC<FormTypes> = ({ formType }) => {
         <FieldSet>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="username">Username</FieldLabel>
-              <Input id="username" type="text" placeholder="Max Leiter" {...register("username")} />
-              <FieldDescription>Choose a unique username for your account.</FieldDescription>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <Input
+                id="email"
+                type="email"
+                placeholder="maxleiter@yandex.com"
+                {...register("email")}
+              />
+              <FieldDescription>Provide your email address.</FieldDescription>
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
