@@ -1,0 +1,78 @@
+import { type FC } from "react";
+
+import { SuggestRegisterForm, SuggestLoginForm } from "@/modules/Auth/ui/index.ts";
+import {
+  Button,
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+  Form,
+  Input,
+  Typography
+} from "@/components/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { type AuthValues, authSchema } from "@/modules/Auth/schemes/authSchema.ts";
+
+type FormTypes = {
+  formType: "login" | "register";
+};
+
+export const AuthForm: FC<FormTypes> = ({ formType }) => {
+  const { handleSubmit, register } = useForm<AuthValues>({
+    resolver: zodResolver(authSchema)
+  });
+
+  const onSubmit = (values: AuthValues) => {
+    console.log(values);
+  };
+
+  return (
+    <div className="mx-auto mt-30 flex flex-col items-center">
+      {renderTitle(formType)}
+      <Form className="p-10" onSubmit={handleSubmit(onSubmit)}>
+        <FieldSet>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="username">Username</FieldLabel>
+              <Input id="username" type="text" placeholder="Max Leiter" {...register("username")} />
+              <FieldDescription>Choose a unique username for your account.</FieldDescription>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                {...register("password")}
+              />
+              <FieldDescription>Must be at least 8 characters long.</FieldDescription>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+        {renderButton(formType)}
+      </Form>
+      {renderSuggestForm(formType)}
+    </div>
+  );
+};
+
+function renderTitle(formType: FormTypes["formType"]) {
+  return (
+    <Typography.H1>{formType === "login" ? `Log in to _` : `Create an account in _`}</Typography.H1>
+  );
+}
+
+function renderButton(formType: FormTypes["formType"]) {
+  return (
+    <Button className="my-5 inline-flex w-full justify-center" type="submit">
+      {formType === "login" ? "Log in" : "Create an account"}
+    </Button>
+  );
+}
+
+function renderSuggestForm(formType: FormTypes["formType"]) {
+  return formType === "login" ? <SuggestRegisterForm /> : <SuggestLoginForm />;
+}

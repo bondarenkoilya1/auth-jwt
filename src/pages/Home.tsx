@@ -1,4 +1,4 @@
-import { Link } from "@/components/ui/link.tsx";
+import { Link } from "@/components/ui";
 
 export const Home = () => {
   return (
