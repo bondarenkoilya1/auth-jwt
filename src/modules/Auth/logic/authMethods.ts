@@ -14,4 +14,4 @@ export const register = (email: string, password: string) =>
     headers: { "Content-Type": "application/json" }
   });
 
-export const logout = () => fetchItem("/users/token/blacklist", { method: "POST" });
+export const logout = () => fetchItem("/token/blacklist", { method: "POST" });
