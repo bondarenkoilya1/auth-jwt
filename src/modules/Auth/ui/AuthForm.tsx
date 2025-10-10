@@ -23,7 +23,7 @@ type FormTypes = {
 };
 
 export const AuthForm: FC<FormTypes> = ({ formType }) => {
-  const { register, onLogin, onRegister } = useAuthForm();
+  const { register, onLogin, onRegister, isVerificationRequested } = useAuthForm();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
@@ -55,7 +55,7 @@ export const AuthForm: FC<FormTypes> = ({ formType }) => {
         </FieldSet>
         {renderButton(formType)}
       </Form>
-      {renderVerificationPanel(formType)}
+      {renderVerificationPanel(formType, isVerificationRequested)}
       {renderSuggestForm(formType)}
     </div>
   );
@@ -79,9 +79,13 @@ function renderSuggestForm(formType: FormTypes["formType"]) {
   return formType === "login" ? <SuggestRegisterForm /> : <SuggestLoginForm />;
 }
 
-function renderVerificationPanel(formType: FormTypes["formType"]) {
+function renderVerificationPanel(
+  formType: FormTypes["formType"],
+  isVerificationRequested: boolean
+) {
   return (
-    formType === "register" && (
+    formType === "register" &&
+    isVerificationRequested && (
       <div className="mt-8">
         <VerificationPanel />
       </div>

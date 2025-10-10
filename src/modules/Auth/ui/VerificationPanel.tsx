@@ -10,7 +10,7 @@ export const VerificationPanel = () => {
         maxLength={6}
         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
         onComplete={() => console.log("Verification")}
-        className="">
+        autoFocus={true}>
         <InputOTPGroup>
           {Array.from({ length: 6 }).map((_, i) => (
             <InputOTPSlot key={i} index={i} className="h-9 w-8" />
