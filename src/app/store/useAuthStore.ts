@@ -1,36 +1,31 @@
 import { create } from "zustand";
-import { login, logout, register } from "@/modules/Auth";
+import { login, logout, register, verifyAndLogin } from "@/modules/Auth";
 
 type AuthStoreType = {
-  user: unknown;
   isAuth: boolean;
-  isLoading: boolean;
   actions: {
     setIsAuth: (status: boolean) => void;
-    setIsLoading: (status: boolean) => void;
-    setUser: (user: unknown) => void;
-    login: (email: string, password: string) => void;
     register: (email: string, password: string) => void;
+    login: (email: string, password: string) => void;
+    verifyAndLogin: (email: string, password: string, code: string) => void;
     logout: () => void;
   };
 };
 
 const useAuthStore = create<AuthStoreType>((set) => ({
-  user: {},
   isAuth: false,
-  isLoading: false,
   actions: {
     setIsAuth: (status) => set({ isAuth: status }),
-    setIsLoading: (status) => set({ isLoading: status }),
-    setUser: (user) => set({ user }),
-    login: async (email, password) => {
-      const response: unknown = await login(email, password);
-      console.log(response);
-      localStorage.setItem("token", response.data.access);
-      set({ isAuth: true });
-    },
     register: async (email, password) => {
       const response: unknown = await register(email, password);
+      console.log(response);
+    },
+    verifyAndLogin: async (email, password, code) => {
+      const response: unknown = await verifyAndLogin(email, password, code);
+      console.log(response);
+    },
+    login: async (email, password) => {
+      const response: unknown = await login(email, password);
       console.log(response);
       localStorage.setItem("token", response.data.access);
       set({ isAuth: true });
@@ -38,12 +33,12 @@ const useAuthStore = create<AuthStoreType>((set) => ({
     logout: async () => {
       await logout();
       localStorage.removeItem("token");
-      set({ isAuth: false, user: {} });
+      set({ isAuth: false });
     }
   }
 }));
 
-export const useUser = () => useAuthStore((state) => state.user);
+export const useUser = (): UserType | null => useAuthStore((state) => state.user);
 export const useAuthStatus = () => useAuthStore((state) => state.isAuth);
 export const useAuthActions = (): AuthStoreType["actions"] =>
   useAuthStore((state) => state.actions);
