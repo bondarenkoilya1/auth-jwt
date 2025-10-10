@@ -53,7 +53,7 @@ export const AuthForm: FC<FormTypes> = ({ formType }) => {
             </Field>
           </FieldGroup>
         </FieldSet>
-        {renderButton(formType)}
+        {renderButton(formType, isVerificationRequested)}
       </Form>
       {renderVerificationPanel(formType, isVerificationRequested)}
       {renderSuggestForm(formType)}
@@ -67,9 +67,12 @@ function renderTitle(formType: FormTypes["formType"]) {
   );
 }
 
-function renderButton(formType: FormTypes["formType"]) {
+function renderButton(formType: FormTypes["formType"], isVerificationRequested: boolean) {
   return (
-    <Button className="my-5 inline-flex w-full justify-center" type="submit">
+    <Button
+      className="my-5 inline-flex w-full justify-center"
+      type="submit"
+      variant={isVerificationRequested ? "outline" : "default"}>
       {formType === "login" ? "Log in" : "Create an account"}
     </Button>
   );

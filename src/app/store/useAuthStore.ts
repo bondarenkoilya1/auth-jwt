@@ -28,14 +28,12 @@ const useAuthStore = create<AuthStoreType>((set) => ({
       console.log(response);
       localStorage.setItem("token", response.data.access);
       set({ isAuth: true });
-      // set({ user: response.data.user });
     },
     register: async (email, password) => {
       const response: unknown = await register(email, password);
       console.log(response);
       localStorage.setItem("token", response.data.access);
       set({ isAuth: true });
-      // set({ user: response.data.user });
     },
     logout: async () => {
       await logout();
