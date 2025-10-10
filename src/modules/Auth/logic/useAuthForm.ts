@@ -11,10 +11,6 @@ export const useAuthForm = () => {
   const { login, register } = useAuthActions();
   const [isVerificationRequested, setIsVerificationRequested] = useState(false);
 
-  const onSubmit = (values: AuthValues) => {
-    console.log(values);
-  };
-
   const onLogin = (values: AuthValues) => {
     const { email, password } = values;
     login(email, password);
@@ -22,12 +18,12 @@ export const useAuthForm = () => {
 
   const onRegister = (values: AuthValues) => {
     const { email, password } = values;
+    console.log(values);
     register(email, password);
     setIsVerificationRequested(true); // do this only if response ok comes
   };
 
   return {
-    onSubmit: formMethods.handleSubmit(onSubmit),
     onLogin: formMethods.handleSubmit(onLogin),
     onRegister: formMethods.handleSubmit(onRegister),
     isVerificationRequested,
