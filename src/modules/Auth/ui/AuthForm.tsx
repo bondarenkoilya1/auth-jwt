@@ -1,6 +1,10 @@
 import { type FC } from "react";
 
-import { SuggestRegisterForm, SuggestLoginForm } from "@/modules/Auth/ui/index.ts";
+import {
+  SuggestRegisterForm,
+  SuggestLoginForm,
+  VerificationPanel
+} from "@/modules/Auth/ui/index.ts";
 import {
   Button,
   Field,
@@ -51,6 +55,7 @@ export const AuthForm: FC<FormTypes> = ({ formType }) => {
         </FieldSet>
         {renderButton(formType)}
       </Form>
+      {renderVerificationPanel(formType)}
       {renderSuggestForm(formType)}
     </div>
   );
@@ -72,4 +77,14 @@ function renderButton(formType: FormTypes["formType"]) {
 
 function renderSuggestForm(formType: FormTypes["formType"]) {
   return formType === "login" ? <SuggestRegisterForm /> : <SuggestLoginForm />;
+}
+
+function renderVerificationPanel(formType: FormTypes["formType"]) {
+  return (
+    formType === "register" && (
+      <div className="mt-8">
+        <VerificationPanel />
+      </div>
+    )
+  );
 }

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { Login, Register, Home, Verification } from "@/pages";
+import { Login, Register, Home } from "@/pages";
 import { App } from "@/app/App.tsx";
 
 export const router = createBrowserRouter([
@@ -11,12 +11,8 @@ export const router = createBrowserRouter([
       { path: "login", Component: Login },
       {
         path: "register",
-        Component: Register,
-      },
-      {
-        path: "verification",
-        Component: Verification,
-      },
-    ],
-  },
+        Component: Register
+      }
+    ]
+  }
 ]);
