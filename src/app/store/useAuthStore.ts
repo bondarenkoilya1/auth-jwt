@@ -1,12 +1,11 @@
 import { create } from "zustand";
-import { login, logout } from "@/modules/Auth";
+import { login } from "@/modules/Auth";
 
 type AuthStoreType = {
   isAuth: boolean;
   actions: {
     setIsAuth: (status: boolean) => void;
     login: (email: string, password: string) => void;
-    logout: () => void;
   };
 };
 
@@ -21,11 +20,6 @@ const useAuthStore = create<AuthStoreType>((set) => ({
       // @ts-expect-error
       localStorage.setItem("token", response.data.access);
       set({ isAuth: true });
-    },
-    logout: async () => {
-      await logout();
-      localStorage.removeItem("token");
-      set({ isAuth: false });
     }
   }
 }));

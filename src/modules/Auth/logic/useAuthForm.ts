@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { authSchema, type AuthValues, register } from "@/modules/Auth";
+import { authSchema, type AuthValues, logout, register } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthActions } from "@/app/store/useAuthStore.ts";
 import { useState } from "react";
@@ -27,9 +27,15 @@ export const useAuthForm = () => {
     }
   };
 
+  const onLogout = async () => {
+    await logout();
+    localStorage.removeItem("token");
+  };
+
   return {
     onLogin: formMethods.handleSubmit(onLogin),
     onRegister: formMethods.handleSubmit(onRegister),
+    onLogout,
     isVerificationRequested,
     ...formMethods
   };
