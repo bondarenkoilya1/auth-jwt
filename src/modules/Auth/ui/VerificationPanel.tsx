@@ -5,10 +5,10 @@ import { useVerifyForm } from "@/modules/Auth/index.js";
 import type { FC } from "react";
 
 export const VerificationPanel: FC<{ email: string }> = ({ email }) => {
-  const { setValue, onVerification } = useVerifyForm();
+  const { setValue, onVerify } = useVerifyForm();
 
   return (
-    <form className="r-4 w-110 rounded-md bg-gray-100 p-4" onSubmit={onVerification}>
+    <form className="r-4 w-110 rounded-md bg-gray-100 p-4" onSubmit={onVerify}>
       <Typography.H4 className="text-center">Verify your email address</Typography.H4>
       <p className="mt-2 text-center text-sm text-gray-700">
         We've sent you verification code on{" "}

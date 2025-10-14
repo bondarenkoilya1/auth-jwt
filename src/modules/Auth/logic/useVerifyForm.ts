@@ -1,22 +1,28 @@
 import { useForm } from "react-hook-form";
-import { verificationSchema, type VerificationValues } from "@/modules/Auth";
+import { verificationSchema, type VerificationValues, verifyEmail } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useAuthActions } from "@/app/store/useAuthStore.ts";
+import { RESPONSE_SUCCESS } from "@/constants/index.js";
 
 export const useVerifyForm = () => {
   const formMethods = useForm<VerificationValues>({
     resolver: zodResolver(verificationSchema)
   });
-  // const { verifyAndLogin } = useAuthActions();
 
-  const onVerification = (values: VerificationValues) => {
-    // const { code } = values;
-    console.log(values);
-    // if (code) verifyAndLogin(code);
+  const onVerify = async (values: VerificationValues) => {
+    const token = localStorage.getItem("emailConfirmationToken");
+    const { code } = values;
+
+    if (token) {
+      const response = await verifyEmail(code, token);
+      if (response.status === RESPONSE_SUCCESS) console.log(response);
+      return;
+    }
+
+    throw new Error("Verification error. There is no available token");
   };
 
   return {
-    onVerification: formMethods.handleSubmit(onVerification),
+    onVerify: formMethods.handleSubmit(onVerify),
     ...formMethods
   };
 };
