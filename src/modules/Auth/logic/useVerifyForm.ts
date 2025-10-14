@@ -14,7 +14,7 @@ export const useVerifyForm = () => {
 
     if (token) {
       const response = await verifyEmail(code, token);
-      if (response.status === RESPONSE_SUCCESS) console.log(response);
+      if (response.status === RESPONSE_SUCCESS) return "login";
       return;
     }
 
@@ -22,7 +22,7 @@ export const useVerifyForm = () => {
   };
 
   return {
-    onVerify: formMethods.handleSubmit(onVerify),
+    onVerify,
     ...formMethods
   };
 };
