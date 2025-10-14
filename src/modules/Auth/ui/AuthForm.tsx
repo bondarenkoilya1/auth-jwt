@@ -83,7 +83,8 @@ function renderButton(formType: FormTypes["formType"], isVerificationRequested: 
     <Button
       className="my-5 inline-flex w-full justify-center"
       type="submit"
-      variant={isVerificationRequested ? "outline" : "default"}>
+      variant={isVerificationRequested ? "outline" : "default"}
+      disabled={isVerificationRequested}>
       {formType === "login" ? "Log in" : "Create an account"}
     </Button>
   );

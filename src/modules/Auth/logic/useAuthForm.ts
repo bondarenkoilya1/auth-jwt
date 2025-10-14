@@ -3,6 +3,7 @@ import { authSchema, type AuthValues, register } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthActions } from "@/app/store/useAuthStore.ts";
 import { useState } from "react";
+import { RESPONSE_SUCCESS } from "@/constants/index.js";
 
 export const useAuthForm = () => {
   const formMethods = useForm<AuthValues>({
@@ -18,10 +19,9 @@ export const useAuthForm = () => {
 
   const onRegister = async (values: AuthValues) => {
     const { username, email, password } = values;
-    console.log(values);
     const response = await register(username, email, password);
-    console.log(response);
-    // setIsVerificationRequested(true); // do this only if response ok comes
+
+    if (response.status === RESPONSE_SUCCESS) setIsVerificationRequested(true);
   };
 
   return {
