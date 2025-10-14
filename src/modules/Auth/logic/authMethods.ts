@@ -3,6 +3,12 @@ import { fetchItem } from "@/lib/fetchItem.ts";
 type StatusType = { status: string };
 type RegisterType = StatusType & { data: { User: unknown; token: string } };
 type VerifyType = StatusType & { message: string };
+type LoginType = StatusType & {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+};
 
 export const register = (username: string, email: string, password: string) =>
   fetchItem<RegisterType>("/auth/register", {
@@ -19,10 +25,12 @@ export const verifyEmail = (code: string, token: string) =>
   });
 
 export const login = (email: string, password: string) =>
-  fetchItem("/token", {
+  fetchItem<LoginType>("/auth/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" }
   });
 
-export const logout = () => fetchItem("/token/blacklist", { method: "POST" });
+export const logout = () => fetchItem<VerifyType>("/auth/logout", { method: "POST" });
+
+export const testLogin = () => fetchItem<LoginType>("/auth/test-login", { method: "POST" });
