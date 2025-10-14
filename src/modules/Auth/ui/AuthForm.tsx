@@ -1,10 +1,6 @@
 import { type FC } from "react";
 
-import {
-  SuggestRegisterForm,
-  SuggestLoginForm,
-  VerificationPanel
-} from "@/modules/Auth/ui/index.ts";
+import { SuggestRegisterForm, SuggestLoginForm, VerificationPanel } from "@/modules/Auth/ui";
 import {
   Button,
   Field,
@@ -16,11 +12,33 @@ import {
   Input,
   Typography
 } from "@/components/ui";
-import { useAuthForm } from "@/modules/Auth";
+import { type AuthValues, useAuthForm } from "@/modules/Auth";
 
 type FormTypes = {
   formType: "login" | "register";
 };
+
+const fields = [
+  {
+    name: "username",
+    label: "Username",
+    type: "text",
+    placeholder: "maxleiter"
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "maxleiter@yandex.com"
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "********",
+    description: "Must be at least 8 characters long."
+  }
+];
 
 export const AuthForm: FC<FormTypes> = ({ formType }) => {
   const { register, onLogin, onRegister, isVerificationRequested, getValues } = useAuthForm();
@@ -30,30 +48,21 @@ export const AuthForm: FC<FormTypes> = ({ formType }) => {
       {renderTitle(formType)}
       <Form className="p-10" onSubmit={formType === "login" ? onLogin : onRegister}>
         <FieldSet>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input
-                disabled={isVerificationRequested}
-                id="email"
-                type="email"
-                placeholder="maxleiter@yandex.com"
-                {...register("email")}
-              />
-              <FieldDescription>Provide your email address.</FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input
-                disabled={isVerificationRequested}
-                id="password"
-                type="password"
-                placeholder="********"
-                {...register("password")}
-              />
-              <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-            </Field>
-          </FieldGroup>
+          {fields.map((field) => (
+            <FieldGroup key={crypto.randomUUID()}>
+              <Field>
+                <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
+                <Input
+                  disabled={isVerificationRequested}
+                  id={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  {...register(field.name as keyof AuthValues)}
+                />
+                {field.description && <FieldDescription>{field.description}</FieldDescription>}
+              </Field>
+            </FieldGroup>
+          ))}
         </FieldSet>
         {renderButton(formType, isVerificationRequested)}
       </Form>
