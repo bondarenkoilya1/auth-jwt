@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { authSchema, type AuthValues } from "@/modules/Auth";
+import { authSchema, type AuthValues, register } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthActions } from "@/app/store/useAuthStore.ts";
 import { useState } from "react";
@@ -8,7 +8,7 @@ export const useAuthForm = () => {
   const formMethods = useForm<AuthValues>({
     resolver: zodResolver(authSchema)
   });
-  const { login, register } = useAuthActions();
+  const { login } = useAuthActions();
   const [isVerificationRequested, setIsVerificationRequested] = useState(false);
 
   const onLogin = (values: AuthValues) => {
@@ -16,11 +16,12 @@ export const useAuthForm = () => {
     login(email, password);
   };
 
-  const onRegister = (values: AuthValues) => {
-    const { email, password } = values;
+  const onRegister = async (values: AuthValues) => {
+    const { username, email, password } = values;
     console.log(values);
-    register(email, password);
-    setIsVerificationRequested(true); // do this only if response ok comes
+    const response = await register(username, email, password);
+    console.log(response);
+    // setIsVerificationRequested(true); // do this only if response ok comes
   };
 
   return {

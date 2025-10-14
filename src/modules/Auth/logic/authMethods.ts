@@ -1,14 +1,14 @@
 import { fetchItem } from "@/lib/fetchItem.ts";
 
-export const login = (email: string, password: string) =>
-  fetchItem("/token", {
+export const register = (username: string, email: string, password: string) =>
+  fetchItem("/auth/register", {
     method: "POST",
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username, email, password }),
     headers: { "Content-Type": "application/json" }
   });
 
-export const register = (email: string, password: string) =>
-  fetchItem("/register", {
+export const login = (email: string, password: string) =>
+  fetchItem("/token", {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" }
