@@ -1,9 +1,10 @@
 import { fetchItem } from "@/lib/fetchItem.ts";
 
 type StatusType = { status: string };
+type RegisterType = StatusType & { data: { User: unknown; token: string } };
 
 export const register = (username: string, email: string, password: string) =>
-  fetchItem<StatusType & { data: unknown }>("/auth/register", {
+  fetchItem<RegisterType>("/auth/register", {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
     headers: { "Content-Type": "application/json" }

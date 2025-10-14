@@ -21,7 +21,10 @@ export const useAuthForm = () => {
     const { username, email, password } = values;
     const response = await register(username, email, password);
 
-    if (response.status === RESPONSE_SUCCESS) setIsVerificationRequested(true);
+    if (response.status === RESPONSE_SUCCESS) {
+      setIsVerificationRequested(true);
+      localStorage.setItem("emailConfirmationToken", response.data.token);
+    }
   };
 
   return {
