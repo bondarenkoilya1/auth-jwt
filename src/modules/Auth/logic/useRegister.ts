@@ -15,8 +15,8 @@ export const useRegister = () => {
     const response = await register(username, email, password);
 
     if (response.status === RESPONSE_SUCCESS) {
-      setIsVerificationRequested(true);
       localStorage.setItem("emailConfirmationToken", response.data.token);
+      setIsVerificationRequested(true);
     }
   };
 
