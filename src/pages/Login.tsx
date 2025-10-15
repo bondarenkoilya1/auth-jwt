@@ -1,5 +1,5 @@
-import { AuthForm } from "@/modules/Auth";
+import { LoginForm } from "@/modules/Auth";
 
 export const Login = () => {
-  return <AuthForm formType="login" />;
+  return <LoginForm />;
 };

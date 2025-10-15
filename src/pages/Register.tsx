@@ -1,5 +1,5 @@
-import { AuthForm } from "@/modules/Auth";
+import { RegisterForm } from "@/modules/Auth";
 
 export const Register = () => {
-  return <AuthForm formType="register" />;
+  return <RegisterForm />;
 };

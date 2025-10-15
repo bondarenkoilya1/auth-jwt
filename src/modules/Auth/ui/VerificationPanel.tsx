@@ -3,12 +3,16 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { Typography } from "@/components/index.js";
 import { useVerifyForm } from "@/modules/Auth/index.js";
 import type { FC } from "react";
+import { cn } from "@/lib/utils.js";
 
-export const VerificationPanel: FC<{ email: string }> = ({ email }) => {
+export const VerificationPanel: FC<{ className?: string; email: string }> = ({
+  className,
+  email
+}) => {
   const { setValue, onVerify, getValues } = useVerifyForm();
 
   return (
-    <form className="r-4 w-110 rounded-md bg-gray-100 p-4">
+    <form className={cn("r-4 w-110 rounded-md bg-gray-100 p-4", className)}>
       <Typography.H4 className="text-center">Verify your email address</Typography.H4>
       <p className="mt-2 text-center text-sm text-gray-700">
         We've sent you verification code on{" "}
