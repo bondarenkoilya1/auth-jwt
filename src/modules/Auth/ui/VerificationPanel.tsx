@@ -1,7 +1,7 @@
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp.js";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { Typography } from "@/components/index.js";
-import { useVerifyForm } from "@/modules/Auth/index.js";
+import { useVerify } from "@/modules/Auth/index.js";
 import type { FC } from "react";
 import { cn } from "@/lib/utils.js";
 
@@ -9,7 +9,7 @@ export const VerificationPanel: FC<{ className?: string; email: string }> = ({
   className,
   email
 }) => {
-  const { setValue, onVerify, getValues } = useVerifyForm();
+  const { setValue, onVerify, getValues } = useVerify();
 
   return (
     <form className={cn("r-4 w-110 rounded-md bg-gray-100 p-4", className)}>

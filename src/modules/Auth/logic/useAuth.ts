@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { RESPONSE_SUCCESS } from "@/constants/index.js";
 
-export const useAuthForm = () => {
+export const useAuth = () => {
   const formMethods = useForm<AuthValues>({
     resolver: zodResolver(authSchema)
   });

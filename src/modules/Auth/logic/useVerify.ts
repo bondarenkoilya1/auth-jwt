@@ -3,7 +3,7 @@ import { verificationSchema, type VerificationValues, verifyEmail } from "@/modu
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RESPONSE_SUCCESS } from "@/constants/index.js";
 
-export const useVerifyForm = () => {
+export const useVerify = () => {
   const formMethods = useForm<VerificationValues>({
     resolver: zodResolver(verificationSchema)
   });

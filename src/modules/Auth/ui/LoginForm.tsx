@@ -12,7 +12,7 @@ import {
   Input,
   Typography
 } from "@/components/ui";
-import { type AuthValues, useAuthForm } from "@/modules/Auth";
+import { type AuthValues, useAuth } from "@/modules/Auth";
 
 const fields = [
   {
@@ -31,7 +31,7 @@ const fields = [
 ];
 
 export const LoginForm: FC = () => {
-  const { register, onLogin, isVerificationRequested, getValues } = useAuthForm();
+  const { register, onLogin, isVerificationRequested, getValues } = useAuth();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">

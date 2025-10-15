@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Typography } from "@/components/ui/typography.tsx";
 import { Form } from "@/components/ui/form.tsx";
 import { Link } from "react-router";
-import { testLoginHandler } from "@/modules/Auth/logic/handlers.js";
+import { testLoginHandler } from "@/modules/Auth/index.js";
 
 export const SuggestRegisterForm = () => {
   return (

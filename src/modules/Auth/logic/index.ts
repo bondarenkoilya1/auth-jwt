@@ -1,3 +1,4 @@
-export * from "./useAuthForm.ts";
+export * from "./useAuth.ts";
 export * from "./authMethods.ts";
-export * from "./useVerifyForm.ts";
+export * from "./useVerify.ts";
+export * from "./handlers.ts";
