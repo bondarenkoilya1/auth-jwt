@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button.tsx";
 import { Typography } from "@/components/ui/typography.tsx";
 import { Form } from "@/components/ui/form.tsx";
-import { useAuthForm } from "@/modules/Auth/index.js";
 import { Link } from "react-router";
+import { testLoginHandler } from "@/modules/Auth/logic/handlers.js";
 
 export const SuggestRegisterForm = () => {
-  const { onTestLogin } = useAuthForm();
-
   return (
     <Form>
       <div className="flex items-center justify-center">
@@ -15,7 +13,7 @@ export const SuggestRegisterForm = () => {
           Create an account
         </Link>
       </div>
-      <Button className="mt-2 w-full" onClick={onTestLogin}>
+      <Button className="mt-2 w-full" onClick={testLoginHandler}>
         Log in as demo user
       </Button>
     </Form>

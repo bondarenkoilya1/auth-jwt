@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
-import { authSchema, type AuthValues, login, logout, register, testLogin } from "@/modules/Auth";
+import { authSchema, type AuthValues, login, register } from "@/modules/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { RESPONSE_SUCCESS } from "@/constants/index.js";
-import * as React from "react";
 
 export const useAuthForm = () => {
   const formMethods = useForm<AuthValues>({
@@ -27,26 +26,9 @@ export const useAuthForm = () => {
     }
   };
 
-  const onLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    await logout();
-    localStorage.removeItem("token");
-  };
-
-  const onTestLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const response = await testLogin();
-
-    if (response.status === RESPONSE_SUCCESS) {
-      localStorage.setItem("accessToken", response.data.accessToken);
-    }
-  };
-
   return {
     onLogin: formMethods.handleSubmit(onLogin),
     onRegister: formMethods.handleSubmit(onRegister),
-    onLogout,
-    onTestLogin,
     isVerificationRequested,
     ...formMethods
   };
