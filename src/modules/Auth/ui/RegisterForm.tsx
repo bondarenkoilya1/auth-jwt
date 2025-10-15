@@ -12,7 +12,9 @@ import {
   Input,
   Typography
 } from "@/components/ui";
-import { type AuthValues, useAuth } from "@/modules/Auth";
+import { type RegisterValues } from "@/modules/Auth";
+import { useVerificationStatus } from "@/app/store/useAuthStore.js";
+import { useRegister } from "@/modules/Auth/logic/useRegister.js";
 
 const fields = [
   {
@@ -37,7 +39,8 @@ const fields = [
 ];
 
 export const RegisterForm: FC = () => {
-  const { register, onRegister, isVerificationRequested, getValues } = useAuth();
+  const { register, onRegister, getValues } = useRegister();
+  const isVerificationRequested = useVerificationStatus();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
@@ -53,7 +56,7 @@ export const RegisterForm: FC = () => {
                   id={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                  {...register(field.name as keyof AuthValues)}
+                  {...register(field.name as keyof RegisterValues)}
                 />
                 {field.description && <FieldDescription>{field.description}</FieldDescription>}
               </Field>
