@@ -12,10 +12,7 @@ export const useLogin = () => {
     const { email, password } = values;
     const response = await login(email, password);
 
-    if (response.status === RESPONSE_SUCCESS) {
-      // window.location.href = "/profile";
-    }
-    console.log(response);
+    if (response.status === RESPONSE_SUCCESS) window.location.href = "/profile";
   };
 
   return {

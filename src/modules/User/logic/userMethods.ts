@@ -17,4 +17,4 @@ export type UserResponseType = {
   status: string;
 };
 
-export const getUser = () => fetchItem<UserResponseType>(API_PART, { credentials: "include" });
+export const getUser = () => fetchItem<UserResponseType>(API_PART);
