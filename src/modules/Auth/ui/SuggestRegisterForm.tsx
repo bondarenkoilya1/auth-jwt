@@ -13,7 +13,7 @@ export const SuggestRegisterForm = () => {
           Create an account
         </Link>
       </div>
-      <Button className="mt-2 w-full" onClick={testLoginHandler}>
+      <Button className="mt-2 w-full" variant="outline" onClick={testLoginHandler}>
         Log in as demo user
       </Button>
     </Form>

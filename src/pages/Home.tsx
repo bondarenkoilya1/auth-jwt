@@ -5,6 +5,7 @@ export const Home = () => {
     <div className="bg-white">
       <Link to="/login">Log in</Link>
       <Link to="/register">Register</Link>
+      <Link to="/profile">Profile</Link>
     </div>
   );
 };

@@ -64,7 +64,7 @@ export const RegisterForm: FC = () => {
           ))}
         </FieldSet>
         <Button
-          className="my-5 inline-flex w-full justify-center"
+          className="mt-4 inline-flex w-full justify-center"
           type="submit"
           variant={isVerificationRequested ? "outline" : "default"}
           disabled={isVerificationRequested}>

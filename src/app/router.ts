@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { Login, Register, Home } from "@/pages";
+import { Login, Register, Home, Profile } from "@/pages";
 import { App } from "@/app/App.tsx";
 
 export const router = createBrowserRouter([
@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register
+      },
+      {
+        path: "profile",
+        Component: Profile
       }
     ]
   }
