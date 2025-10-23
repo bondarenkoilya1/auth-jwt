@@ -41,3 +41,10 @@ export const logout = () => fetchItem<VerifyType>(`${API_PART}/logout`, { method
 export const testLogin = () => fetchItem<LoginType>(`${API_PART}/test-login`, { method: "POST" });
 
 export const refreshToken = () => fetchItem<LoginType>(`${API_PART}/refresh`, { method: "POST" });
+
+export const resendConfirmation = (email: string) =>
+  fetchItem(`${API_PART}/resend-confirmation`, {
+    method: "POST",
+    body: JSON.stringify({ email }),
+    headers: { "Content-Type": "application/json" }
+  });
