@@ -64,7 +64,7 @@ export const LoginForm: FC = () => {
           Log in
         </Button>
       </Form>
-      {isVerificationRequested && <VerificationPanel email={getValues("email")} className="mt-8" />}
+      {isVerificationRequested && <VerificationPanel email={getValues("email")} className="mt-6" />}
       <SuggestRegisterForm />
     </div>
   );

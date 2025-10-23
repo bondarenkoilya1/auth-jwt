@@ -5,9 +5,6 @@ const baseUrl = API_URL;
 export async function fetchItem<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${baseUrl}${url}`, { ...options, credentials: "include" });
 
-  if (!response.ok) {
-    throw new Error(`Network response was not ok. Response status: ${response.status}`);
-  }
-
+  if (!response.ok) throw response;
   return (await response.json()) as T;
 }

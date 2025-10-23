@@ -9,6 +9,9 @@ type LoginType = StatusType & {
     refreshToken: string;
   };
 };
+type ErrorType = {
+  Message?: string;
+};
 
 const API_PART = "/auth";
 
@@ -27,7 +30,7 @@ export const verifyEmail = (code: string, token: string) =>
   });
 
 export const login = (email: string, password: string) =>
-  fetchItem<LoginType>(`${API_PART}/login`, {
+  fetchItem<LoginType & ErrorType>(`${API_PART}/login`, {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" }
