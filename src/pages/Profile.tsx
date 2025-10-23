@@ -1,6 +1,7 @@
 import { useGetUser } from "@/modules/User/logic/useGetUser.js";
-import { Button, Link, Typography } from "@/components/index.js";
+import { Button, Typography } from "@/components/index.js";
 import { useEffect } from "react";
+import { logoutHandler } from "@/modules/Auth/index.js";
 
 export const Profile = () => {
   const { onGetUser, user, isLoading, error } = useGetUser();
@@ -21,7 +22,11 @@ export const Profile = () => {
     return (
       <section className="flex min-h-screen flex-col items-center justify-center gap-4">
         <Typography.P className="text-red-600">Error: {error.message}</Typography.P>
-        <Button onClick={onGetUser}>Retry</Button>
+        <div className="flex items-center justify-center">
+          <Button onClick={onGetUser} className="mr-3">
+            Retry
+          </Button>
+        </div>
       </section>
     );
   }
@@ -29,10 +34,7 @@ export const Profile = () => {
   if (!user) {
     return (
       <section className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <Typography.P>No user found</Typography.P>
-        <Link to="/login">
-          <Button>Go to Login</Button>
-        </Link>
+        <Typography.H1>No user found</Typography.H1>
       </section>
     );
   }
@@ -50,8 +52,8 @@ export const Profile = () => {
       {/* Header */}
       <header className="mb-8 flex items-center justify-between border-b pb-4">
         <Typography.H1 className="m-0">Profile</Typography.H1>
-        <Button onClick={onGetUser} variant="outline">
-          Refresh
+        <Button onClick={logoutHandler} variant="outline">
+          Logout
         </Button>
       </header>
 

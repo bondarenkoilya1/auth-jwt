@@ -5,6 +5,7 @@ import { RESPONSE_SUCCESS } from "@/constants/index.js";
 export const logoutHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
   event.preventDefault();
   await logout();
+  window.location.href = "/";
 };
 
 export const testLoginHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {

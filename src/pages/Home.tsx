@@ -1,11 +1,9 @@
-import { Link } from "@/components/ui";
+import { Typography } from "@/components/ui";
 
 export const Home = () => {
   return (
-    <div className="bg-white">
-      <Link to="/login">Log in</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/profile">Profile</Link>
+    <div className="flex h-screen items-center justify-center bg-white">
+      <Typography.H1>Home page</Typography.H1>
     </div>
   );
 };

@@ -36,3 +36,5 @@ export const login = (email: string, password: string) =>
 export const logout = () => fetchItem<VerifyType>(`${API_PART}/logout`, { method: "POST" });
 
 export const testLogin = () => fetchItem<LoginType>(`${API_PART}/test-login`, { method: "POST" });
+
+export const refreshToken = () => fetchItem<LoginType>(`${API_PART}/refresh`, { method: "POST" });
