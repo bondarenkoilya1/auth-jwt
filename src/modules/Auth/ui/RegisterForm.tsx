@@ -15,42 +15,23 @@ import {
 import { type RegisterValues } from "@/modules/Auth";
 import { useVerificationStatus } from "@/app/store/useAuthStore.js";
 import { useRegister } from "@/modules/Auth/logic/useRegister.js";
-
-const fields = [
-  {
-    name: "username",
-    label: "Username",
-    type: "text",
-    placeholder: "maxleiter"
-  },
-  {
-    name: "email",
-    label: "Email",
-    type: "email",
-    placeholder: "maxleiter@yandex.com"
-  },
-  {
-    name: "password",
-    label: "Password",
-    type: "password",
-    placeholder: "********",
-    description: "Must be at least 8 characters long."
-  }
-];
+import { useTranslation } from "react-i18next";
+import { registerFields } from "@/data/index.js";
 
 export const RegisterForm: FC = () => {
   const { register, onRegister, getValues } = useRegister();
+  const { t } = useTranslation();
   const isVerificationRequested = useVerificationStatus();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
-      <Typography.H1>Create an account in _</Typography.H1>
+      <Typography.H1>{t("create_account_in")} _</Typography.H1>
       <Form className="p-10" onSubmit={onRegister}>
         <FieldSet>
-          {fields.map((field) => (
+          {registerFields.map((field) => (
             <FieldGroup key={crypto.randomUUID()}>
               <Field>
-                <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
+                <FieldLabel htmlFor={field.name}>{t(field.name)}</FieldLabel>
                 <Input
                   disabled={isVerificationRequested}
                   id={field.name}
@@ -58,7 +39,7 @@ export const RegisterForm: FC = () => {
                   placeholder={field.placeholder}
                   {...register(field.name as keyof RegisterValues)}
                 />
-                {field.description && <FieldDescription>{field.description}</FieldDescription>}
+                {field.description && <FieldDescription>{t(field.description)}</FieldDescription>}
               </Field>
             </FieldGroup>
           ))}
@@ -68,7 +49,7 @@ export const RegisterForm: FC = () => {
           type="submit"
           variant={isVerificationRequested ? "outline" : "default"}
           disabled={isVerificationRequested}>
-          Create an account
+          {t("create_account")}
         </Button>
       </Form>
       {isVerificationRequested && (

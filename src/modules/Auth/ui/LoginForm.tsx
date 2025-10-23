@@ -14,36 +14,23 @@ import {
 } from "@/components/ui";
 import { type LoginValues, useLogin } from "@/modules/Auth";
 import { useVerificationStatus } from "@/app/store/useAuthStore.js";
-
-const fields = [
-  {
-    name: "email",
-    label: "Email",
-    type: "email",
-    placeholder: "maxleiter@yandex.com"
-  },
-  {
-    name: "password",
-    label: "Password",
-    type: "password",
-    placeholder: "********",
-    description: "Must be at least 8 characters long."
-  }
-];
+import { useTranslation } from "react-i18next";
+import { loginFields } from "@/data/index.js";
 
 export const LoginForm: FC = () => {
   const { register, onLogin, getValues } = useLogin();
   const isVerificationRequested = useVerificationStatus();
+  const { t } = useTranslation();
 
   return (
     <div className="mx-auto mt-30 flex flex-col items-center">
-      <Typography.H1>Log in to _</Typography.H1>
+      <Typography.H1>{t("login_to")} _</Typography.H1>
       <Form className="p-10" onSubmit={onLogin}>
         <FieldSet>
-          {fields.map((field) => (
+          {loginFields.map((field) => (
             <FieldGroup key={crypto.randomUUID()}>
               <Field>
-                <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
+                <FieldLabel htmlFor={field.name}>{t(field.name)}</FieldLabel>
                 <Input
                   disabled={isVerificationRequested}
                   id={field.name}
@@ -51,7 +38,7 @@ export const LoginForm: FC = () => {
                   placeholder={field.placeholder}
                   {...register(field.name as keyof LoginValues)}
                 />
-                {field.description && <FieldDescription>{field.description}</FieldDescription>}
+                {field.description && <FieldDescription>{t(field.description)}</FieldDescription>}
               </Field>
             </FieldGroup>
           ))}
@@ -61,7 +48,7 @@ export const LoginForm: FC = () => {
           type="submit"
           variant={isVerificationRequested ? "outline" : "default"}
           disabled={isVerificationRequested}>
-          Log in
+          {t("login")}
         </Button>
       </Form>
       {isVerificationRequested && <VerificationPanel email={getValues("email")} className="mt-6" />}
