@@ -1,3 +1,9 @@
 import { Outlet } from "react-router";
+import { Header } from "@/components";
 
-export const App = () => <Outlet />;
+export const App = () => (
+  <>
+    <Header />
+    <Outlet />
+  </>
+);
